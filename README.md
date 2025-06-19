@@ -1,2 +1,10 @@
 # GeneMorphFormer
 GeneMorphFormer: Transformer-Driven Cross-Scale Mapping from Gene Expression to Cortical Morphology
+
+The data used in this study was sourced from the marmoset brain atlas dataset published by RIKEN Institute of Neuroscience in Japan in Brain/MINDS [12]. The dataset includes Nissl staining histological data, Nissl volume data registered to T2 weighted magnetic resonance imaging data, and MRI gray matter segmentation data, which have been widely used in neuroimaging analysis and anatomical research.
+
+This study mainly used Nissl staining histological data, Nissl volume data, and gray matter segmentation data. Among them, the Nissl staining histological data consists of 60 slices, with an original image resolution of 96 dpi and a size of 7200 × 8400 pixels. The Nissl volume data is based on Nissl staining images that have undergone inter slice illumination normalization, deformation correction, and 3D volume reconstruction, and finally accurately registered to MRI morphology in NIfTI format data. The size of the Nissl volume data and gray matter segmentation data are both 678 × 1000 × 210, with a spatial resolution of 0.04 × 0.04 × 0.11mm ³.
+
+In order to standardize the input format, the Nissl volume data and gray matter segmentation data were sliced along the coronal direction in this study, and standardized to ensure spatial consistency between the Nissl volume data and gray matter segmentation data. Specifically, by traversing the second dimension (coronal direction) of the data and recording all slice indices containing non-zero pixels, the effective data range was determined. On this basis, each effective slice is subjected to standardized preprocessing. The data coordinates of each slice image are adjusted to the standard image coordinate system, and the size is uniformly adjusted to 512 × 512 for inclusion in the model training.
+
+Finally, 738 sets of Nissl volume slices and corresponding gray matter segmentation data were selected as training samples for the model. Each set of data includes Nissl volume slice data (as model input) and gray matter segmentation data (as training labels).
